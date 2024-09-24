@@ -4,7 +4,7 @@
   "description": "This is ebook project",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon server.js",
+    "dev": "nodemon server.ts",
     "start":"node index.js"
   },
   "author": "Sakti <shakti.20k@gmail.com>",
