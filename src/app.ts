@@ -1,6 +1,7 @@
 import express from "express";
 import globalErrorHandlers from "./middlewares/globalErrorHandlers";
 import userRouter from "./user/userRouter";
+import bookRouter from "./book/bookRoutes";
 const app=express();
 
 //Routes
@@ -10,6 +11,7 @@ app.get("/", (req,res,next) => {
 //middlewares
 app.use(express.json())
 app.use("/api/users", userRouter)
+app.use('/api/books',bookRouter)
 
 // Global error handlers
 app.use(globalErrorHandlers)
