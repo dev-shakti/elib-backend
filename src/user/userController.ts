@@ -45,4 +45,8 @@ const createUser = async(req: Request, res: Response, next: NextFunction) => {
  }
 };
 
-export default createUser;
+const loginUser = async(req: Request, res: Response, next: NextFunction) => {
+  res.json({})
+}
+
+export  {createUser,loginUser};
