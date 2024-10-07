@@ -7,7 +7,8 @@ const app=express();
 app.get("/", (req,res,next) => {
     res.send("Welcome to elib books")
 })
-
+//middlewares
+app.use(express.json())
 app.use("/api/users", userRouter)
 
 // Global error handlers
