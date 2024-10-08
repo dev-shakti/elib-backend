@@ -7,3 +7,5 @@ import { config as conf } from "./config";
     api_key: conf.cloudinaryApiKey,
     api_secret: conf.cloudinaryApiSecret
 });
+
+export default cloudinary
