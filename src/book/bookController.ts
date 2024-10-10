@@ -40,7 +40,6 @@ const createBook = async (req: Request, res: Response, next: NextFunction) => {
       folder: "book-covers",
       format: coverImageMimeType,
     });
-    console.log("Upload result for cover image:", uploadResult);
 
     //upload pdfs to cloudinary
     const uploadBookFileResult = await cloudinary.uploader.upload(
@@ -52,11 +51,9 @@ const createBook = async (req: Request, res: Response, next: NextFunction) => {
         format: "pdf",
       }
     );
-    console.log("Upload result for book file:", uploadBookFileResult);
 
     // Create book in the database
     const _req = req as AuthRequest;
-    console.log("userId", _req.userId);
     const newBook = await Book.create({
       title,
       genre,
@@ -80,7 +77,7 @@ const createBook = async (req: Request, res: Response, next: NextFunction) => {
 const updateBook = async (req: Request, res: Response, next: NextFunction) => {
   const { title, description, genre } = req.body;
   const bookId = req.params.bookId;
-  console.log(bookId)
+
   try {
     //find book by ID
     const book = await Book.findOne({ _id: bookId });
@@ -160,8 +157,8 @@ const getAllBooks = async (req: Request, res: Response, next: NextFunction) => {
     const books = await Book.find();
     res.json(books);
   } catch (error) {
-    console.log(error);
-    return next(createHttpError(400, "Error while getting books"));
+    console.error("Error retrieving books:", error);
+    next(createHttpError(500, "Internal Server Error"));
   }
 };
 
@@ -180,8 +177,8 @@ const getSingleBook = async (
     }
     res.json(book);
   } catch (error) {
-    console.log(error);
-    return next(createHttpError(400, "Error while getting books"));
+    console.error("Error retrieving book:", error);
+    next(createHttpError(500, "Internal Server Error"));
   }
 };
 
@@ -210,7 +207,7 @@ const deleteBook = async (req: Request, res: Response, next: NextFunction) => {
 
     const bookFileSplit = book.file.split("/");
     const bookFilePublicId =
-      bookFileSplit.at(-2) + "/" + bookFileSplit.at(-1)?.split(".").at(-2);
+      bookFileSplit.at(-2) + "/" + bookFileSplit.at(-1);
 
     // Delete the book's cover image and file from Cloudinary
     await cloudinary.uploader.destroy(bookCoverImagePublicId);
