@@ -1,5 +1,5 @@
 import express from "express";
-import { createBook, getAllBooks, getSingleBook } from "./bookController";
+import { createBook, deleteBook, getAllBooks, getSingleBook, updateBook } from "./bookController";
 import multer from "multer";
 import path from "path";
 import { authenticate } from "../middlewares/authenticate";
@@ -20,7 +20,18 @@ bookRouter.post(
   createBook
 );
 
+bookRouter.patch(
+  "/",
+  authenticate,
+  upload.fields([
+    { name: "coverImage", maxCount: 1 },
+    { name: "file", maxCount: 1 },
+  ]),
+  updateBook
+);
+
 bookRouter.get("/", getAllBooks)
 bookRouter.get("/:bookId", getSingleBook)
+bookRouter.delete("/:bookId",authenticate,deleteBook)
 
 export default bookRouter;
