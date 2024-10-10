@@ -46,7 +46,7 @@ const createBook = async (req: Request, res: Response, next: NextFunction) => {
     const uploadBookFileResult = await cloudinary.uploader.upload(
       bookFilePath,
       {
-        resource_type: "auto",
+        resource_type: "raw",
         filename_override: bookFileName,
         folder: "book-pdfs",
         format: "pdf",
