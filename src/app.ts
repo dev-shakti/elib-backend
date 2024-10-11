@@ -12,7 +12,7 @@ app.use(express.json())
 app.use(cors({
     origin:config.frontendDomain
 }))
-
+console.log(config.frontendDomain)
 //Routes
 app.get("/", (req,res) => {
     res.send("Welcome to elib books")
