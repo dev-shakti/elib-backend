@@ -1,10 +1,8 @@
-import { UserTypes } from "../user/userTypes";
-
 export interface BookTypes{
     _id: string;
   title: string;
   description: string;
-  author: UserTypes;
+  author: string;
   genre: string;
   coverImage: string;
   file: string;

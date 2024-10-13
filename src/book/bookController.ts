@@ -7,7 +7,7 @@ import Book from "./bookModel";
 import { AuthRequest } from "../middlewares/authenticate";
 
 const createBook = async (req: Request, res: Response, next: NextFunction) => {
-  const { title, genre, description } = req.body;
+  const { title, genre, author, description } = req.body;
 
   const files = req.files as { [fieldname: string]: Express.Multer.File[] };
 
@@ -53,12 +53,11 @@ const createBook = async (req: Request, res: Response, next: NextFunction) => {
     );
 
     // Create book in the database
-    const _req = req as AuthRequest;
     const newBook = await Book.create({
       title,
       genre,
       description,
-      author: _req.userId,
+      author,
       coverImage: uploadResult.secure_url,
       file: uploadBookFileResult.secure_url,
     });
@@ -75,7 +74,7 @@ const createBook = async (req: Request, res: Response, next: NextFunction) => {
 
 //update book
 const updateBook = async (req: Request, res: Response, next: NextFunction) => {
-  const { title, description, genre } = req.body;
+  const { title, description, genre,author } = req.body;
   const bookId = req.params.bookId;
 
   try {
@@ -139,6 +138,7 @@ const updateBook = async (req: Request, res: Response, next: NextFunction) => {
           title: title,
           description: description,
           genre: genre,
+          author:author,
           coverImage: completeCoverImage ? completeCoverImage : book.coverImage,
           file: completeFileName ? completeFileName : book.file,
       },
@@ -154,7 +154,7 @@ const updateBook = async (req: Request, res: Response, next: NextFunction) => {
 //get all books
 const getAllBooks = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const books = await Book.find();
+    const books = await Book.find()
     res.json(books);
   } catch (error) {
     console.error("Error retrieving books:", error);

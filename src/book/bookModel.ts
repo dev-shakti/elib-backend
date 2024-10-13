@@ -12,9 +12,7 @@ const bookSchema=new mongoose.Schema<BookTypes>({
         require: true,
     },
     author: {
-        type: mongoose.Schema.Types.ObjectId,
-        // add ref
-        ref: "UserTypes",
+        type: String,
         required: true,
     },
     coverImage: {
