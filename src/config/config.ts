@@ -10,7 +10,7 @@ const _config={
     cloudinaryCloudName:process.env.CLOUDARY_CLOUD,
     cloudinaryApiKey:process.env.CLOUDINARY_API_KEY,
     cloudinaryApiSecret:process.env.CLOUDINARY_API_SECRET,
-    frontendDomain:process.env.FRONTEND_DOMAIN
+    frontendDomain:process.env.FRONTEND_DOMAIN || "http://localhost:5173"
 }
 
 export const config=Object.freeze(_config);
