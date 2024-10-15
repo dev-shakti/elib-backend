@@ -9,12 +9,13 @@ const app=express();
 
 //middlewares
 app.use(express.json())
-app.use(cors({
-    origin:config.frontendDomain,
-    credentials: true,  
-    methods: ['GET', 'POST', 'PUT','PATCH', 'DELETE'],
-}))
-console.log(config.frontendDomain)
+app.use(cors())
+// app.use(cors({
+//     origin:config.frontendDomain,
+//     credentials: true,  
+//     methods: ['GET', 'POST', 'PUT','PATCH', 'DELETE'],
+// }))
+// console.log(config.frontendDomain)
 //Routes
 app.get("/", (req,res) => {
     res.send("Welcome to elib books")

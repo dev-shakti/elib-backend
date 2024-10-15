@@ -153,6 +153,7 @@ const updateBook = async (req: Request, res: Response, next: NextFunction) => {
 };
 //get all books
 const getAllBooks = async (req: Request, res: Response, next: NextFunction) => {
+  
   try {
     const books = await Book.find()
     res.json(books);
